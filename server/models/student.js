@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     lastName: DataTypes.STRING,
     classes: DataTypes.ENUM("X","XI","XII","XII"),
     major_id: DataTypes.INTEGER,
-    gender: DataTypes.ENUM("M", "F")
+    gender: DataTypes.ENUM("M", "F"),
   }, {
     sequelize,
     modelName: 'student',

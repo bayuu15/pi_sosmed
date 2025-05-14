@@ -1,30 +1,28 @@
 "use strict";
 const { Model } = require("sequelize");
+const { v4: uuid4 } = require("uuid");
 module.exports = (sequelize, DataTypes) => {
   class user extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
     static associate(models) {
-      // mendefinisikan asosiasi di sini
-      // user.hasMany(models.student, {
-      //     foreignKey: 'user_id',
-      //     as: 'students'
-      // });
-      // user.hasMany(models.teacher, {
-      //     foreignKey: 'user_id',
-      //     as: 'teachers'
-      // });
+      // define association here
     }
   }
   user.init(
     {
-      username: {
-        type: DataTypes.STRING,
+      id: {
         allowNull: false,
-        unique: true,
+        primaryKey: true,
+        type: DataTypes.UUID,
+        defaultValue: uuid4,
       },
-      password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
+      username: DataTypes.STRING,
+      password: DataTypes.STRING,
+      email: DataTypes.STRING,
     },
     {
       sequelize,

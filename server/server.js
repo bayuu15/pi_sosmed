@@ -1,117 +1,59 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const WebSocket = require('ws')
-const http = require('http')
-const { student, user } = require("./models");
+// const express = require('express')
+// const bodyParser = require('body-parser')
+// const cors = require('cors')
+// const studentRoute = require('./routes/studentRoute')
+// const authRoute = require('./routes/authRoute')
 
-const app = express()
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
+// const app = express()
+// const corsOption = {
+//     origin: ['http://127.0.0.1:5500']
+// }
 
-const PORT = 3000
-const hostName = "127.0.0.1"
+// app.use(bodyParser.json())
+// app.use(bodyParser.urlencoded({ extended: false }))
+// app.use(cors(corsOption))
 
-const server = http.createServer(app)
-const wss = new WebSocket.Server({ server })
+// const PORT = 3000
+// const hostName = "127.0.0.1"
 
-wss.on('connection', (ws) => {
-    console.log(`connecting to ws`)
+// app.get("/", (req, res) => {
+//     res.send({
+//         message: "Welcome to my sosmed backend services!"
+//     })
+// })
 
-    ws.on('message', (message) => {
-        console.log(`Received: `, message)
-    })
+// app.use("/v1/student", studentRoute(express))
+// app.use("/v1/auth", authRoute(express))
 
-    ws.on('close', () => console.log(`disconnected`))
-})
+// app.listen(PORT, () => console.log(`Server running at http://${hostName}:${PORT}`))
 
-app.post('/send-message', (req, res) => {
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const studentRoute = require("./routes/studentRoute");
+const authRoute = require("./routes/authRoute");
 
-    const { data } = req.body
+const app = express();
+const corsOption = {
+  origin: ["http://127.0.0.1:5500"],
+};
 
-    if (!!data == false) {
-        res.status(422).json({
-            data: [],
-            message: "no message content !"
-        })
-        return
-    }
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors(corsOption));
 
-    res.status(200).json({
-        data: data,
-        message: "send message success!"
-    })
-})
+const PORT = 3000;
+const hostName = "127.0.0.1";
 
 app.get("/", (req, res) => {
-    res.send({
-        message: "Welcome to my sosmed backend services!"
-    })
-})
-
-app.get("/student/:id", async (req, res) => {
-    try {
-        const { id } = req.params;
-        const studentData = await student.findByPk(id);
-        if (!studentData) return res.status(404).json({messege: "Student Has Founded"});
-        res.status(200).json(studentData);
-    
-    }   catch (error) {
-        res.status(500).json({error: error.message});
-    }   
+  res.send({
+    message: "Welcome to my sosmed backend services!",
+  });
 });
 
-app.post("/student", async (req, res) => {
-    try {
-        const {firstName, lastName, classes, major_id, gender} = req.body;
+// app.use("/v1/student", studentRoute(express));
+app.use("/v1/auth", authRoute(express));
 
-        if (!firstName || !lastName || !classes || !major_id || !gender) {
-        return res.status(400).json({ message: "All fields are required!" });
-        
-        }
-
-        const newStudent = await student.create({ firstName, lastName, classes, major_id, gender });
-
-        res.status(201).json({
-            message: "Student created successfully!",
-            data: newStudent
-        });
-    
-    }   catch  (error) {
-        console.error("Error:", error.message);
-        res.status(500).json({ error: error.message });
-    }
-});
-
-app.put("/student/:id", async (req, res) => {
-    try {
-        const { id } = req.params;
-        const { firstName, lastName, classes, major_id, gender } = req.body;
-
-        const updated = await student.update(
-            { firstName, lastName, classes, major_id, gender },
-            { where: { id } }
-        );
-
-        if (!updated[0]) return res.status(404).json({ message: "Student not found" });
-
-        res.status(200).json({ message: "Student updated successfully!" });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
-
-app.delete("/student/:id", async (req, res) => {
-   try {
-        const { id } = req.params;
-
-        const deleted = await student.destroy({ where: { id } });
-
-        if (!deleted) return res.status(404).json({ message: "Student not found" });
-
-        res.status(200).json({ message: "Student deleted successfully! / berhasil dihapus" });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-})
-
-app.listen(PORT, () => console.log(`Server running at http://${hostName}:${PORT}`))
+app.listen(PORT, () =>
+  console.log(`Server running at http://${hostName}:${PORT}`)
+);

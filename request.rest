@@ -1,16 +1,20 @@
-GET http://127.0.0.1:3000/student/{3}
+GET http://127.0.0.1:3000/student/6
 ###
 
-POST http://127.0.0.1:3000/student
+POST http://127.0.0.1:3000/v1/auth/register
 Content-Type: application/json
 
 {
-    "firstName":"Rasyaqwerty",
-    "lastName":"Bayuwertgyh",
-    "classes":"X",
-    "major_id": 1,
+     "username": "tes9995vyg",
+    "email": "tes9hbh99@gmail.com",
+    "password": "delapan",
+    "firstName": "yedgb",
+    "lastName": "bcjebr",
+    "classes": "XI",
+    "major_id": "2",
     "gender": "M"
 }
+    
 ###
 
 PUT http://127.0.0.1:3000/student/1
@@ -25,4 +29,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://127.0.0.1:3000/student/2
+DELETE http://127.0.0.1:3000/student/5
