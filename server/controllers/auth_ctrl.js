@@ -1,8 +1,37 @@
 const { validationResult } = require("express-validator");
 const { user, student, student_user, role, role_user } = require("../models");
 const bcryptjs = require("bcryptjs");
+const jwt = require('jsonwebtoken')
 
 let self = {};
+
+self.login = async (req, res) => {
+   const error = validationResult(req);
+   if (!error.isEmpty()) {
+     return res.status(422).json(error);
+   }
+
+   const options = {
+    expiresIn: '24h'
+   }
+
+   const secret = "PI_JAYA"
+
+   const userData = user.findOne({
+    where: {
+      username: req.body.username
+    }
+   }) 
+
+   const token = jwt.sign({
+    data: this.user,
+   },secret, options)
+
+   res.status(200).json({
+    messege: 'login success',
+    token: token
+   })
+}
 
 self.save = async (req, res) => {
   const error = validationResult(req);

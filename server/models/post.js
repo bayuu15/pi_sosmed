@@ -1,35 +1,37 @@
-"use strict";
-const { Model } = require("sequelize");
-const { v4: uuid4 } = require("uuid");
+'use strict';
+const {
+  Model
+} = require('sequelize');
+const { v4: uuidv4 } = require("uuid");
+
 module.exports = (sequelize, DataTypes) => {
-  class user extends Model {
+  class post extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      user.belongsToMany(models.role, {
-        through: 'role_users',
-      })
+      // define association here
     }
   }
-  user.init(
+  post.init(
     {
       id: {
+        // DataTypes.UUID,
         allowNull: false,
         primaryKey: true,
         type: DataTypes.UUID,
-        defaultValue: uuid4,
+        defaultValue: uuidv4,
       },
-      username: DataTypes.STRING,
-      password: DataTypes.STRING,
-      email: DataTypes.STRING,
+      content_text: DataTypes.STRING,
+      content_image: DataTypes.STRING,
+      user_id: DataTypes.UUID,
     },
     {
       sequelize,
-      modelName: "user",
+      modelName: "post",
     }
   );
-  return user;
+  return post;
 };

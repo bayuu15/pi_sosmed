@@ -88,7 +88,7 @@ const Register = () => {
               rowSpacing={2}
               columns={{ xs: 1, sm: 2, md: 3, lg: 4 }}
             >
-              <Grid item size={6}>
+              <Grid item size={2}>
                 <FormControl>
                   <FormLabel htmlFor="username">Username</FormLabel>
                   <TextField
@@ -107,7 +107,7 @@ const Register = () => {
                   />
                 </FormControl>
               </Grid>
-              <Grid item size={6}>
+              <Grid item size={2}>
                 <FormControl>
                   <FormLabel htmlFor="email">Email</FormLabel>
                   <TextField
@@ -127,14 +127,14 @@ const Register = () => {
                 </FormControl>
               </Grid>
 
-              <Grid item size={6}>
+              <Grid item size={2}>
                 <FormControl>
                   <FormLabel htmlFor="firtsname">Firts name</FormLabel>
                   <TextField
                     // error={firtsnameError}
                     // helperText={firtsnameErrorMessage}
                     name="firtsname"
-                    placeholder="••••••"
+                    placeholder="First name"
                     type="firtsname"
                     id="firtsname"
                     autoComplete="current-firtsname"
@@ -147,14 +147,14 @@ const Register = () => {
                 </FormControl>
               </Grid>
 
-              <Grid item size={6}>
+              <Grid item size={2}>
                 <FormControl>
                   <FormLabel htmlFor="lastname">Last name</FormLabel>
                   <TextField
                     // error={lastnameError}
                     // helperText={lastnameErrorMessage}
                     name="lastname"
-                    placeholder="••••••"
+                    placeholder="Last name"
                     type="lastname"
                     id="lastname"
                     autoComplete="current-lastname"
@@ -167,7 +167,7 @@ const Register = () => {
                 </FormControl>
               </Grid>
 
-              <Grid item size={6}>
+              <Grid item size={2}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Classes</InputLabel>
                   <Select
@@ -185,7 +185,7 @@ const Register = () => {
                 </FormControl>
               </Grid>
 
-              <Grid item size={6}>
+              <Grid item size={2}>
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Major</InputLabel>
                 <Select
