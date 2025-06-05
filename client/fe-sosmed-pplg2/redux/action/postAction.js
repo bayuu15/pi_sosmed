@@ -22,7 +22,7 @@ export const storePosting = (token, data) => (dispatch) =>
         },
       });
     });
-
+// tes
 export const fetchPosting = (token) => (dispatch) => {
   dispatch({ type: "POST_INIT" });
   APISERVICE()

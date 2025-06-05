@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { fetchProfile } from "../../redux/action/authAction";
+
+import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
   createTheme,
